@@ -107,7 +107,6 @@ func Monitor() {
 			for k, v := c.First(); k != nil; k, v = c.Next() {
                 date := binary.BigEndian.Uint64(v[:8])
 				now := uint64(time.Now().YearDay())
-				fmt.Println(date, now)
                 if now - date > 90 {
                     bucket.Delete(k)
                 }
