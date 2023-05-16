@@ -3,8 +3,6 @@ import concurrent.futures
 import time
 import csv
 
-URL = "http://192.168.1.5:8080"
-
 def send_req(url):
     start_time = time.time()
     _ = requests.get(url)
@@ -16,7 +14,7 @@ def test_api(num_requests):
 
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Send multiple requests concurrently
-        futures = [executor.submit(send_req, URL) for _ in range(num_requests)]
+        futures = [executor.submit(send_req, f"http://localhost:8080/hit/key{i}/that_{i}") for i in range(num_requests)]
 
         # Collect the response times
         for future in concurrent.futures.as_completed(futures):
@@ -25,7 +23,7 @@ def test_api(num_requests):
 
     return response_times
 
-num_req = 10000000
+num_req = 10000
 
 start_time = time.time()
 response_times = test_api(num_req)
