@@ -95,7 +95,7 @@ func CountKeys() uint64 {
 }
 
 func Monitor() {
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(24 * time.Hour)
 	defer ticker.Stop()
 
 	for {
